@@ -469,7 +469,7 @@ class yt_downloader implements cnfg
         $pb_info = self::get_public_info();
 
         if($pb_info !== FALSE) {
-			$prepared_title = htmlentities(mb_convert_encoding($pb_info["title"], "utf-8"));
+            $prepared_title = htmlentities(mb_convert_encoding($pb_info["title"], "utf-8"));
             $htmlTitle =  transliterator_transliterate("Any-Latin; Latin-ASCII; NFD; [:Nonspacing Mark:] Remove; NFC; Lower();", $prepared_title);
             $videoTitle = self::canonicalize($htmlTitle);
         }
@@ -493,7 +493,7 @@ class yt_downloader implements cnfg
      */
     private function get_url_map($data)
     {
-		parse_str($data, $parsed_data);
+        parse_str($data, $parsed_data);
         if(empty($parsed_data['url_encoded_fmt_stream_map'])) {
             return FALSE;
         }
@@ -502,7 +502,7 @@ class yt_downloader implements cnfg
             $tmp = array();
 
             foreach($urls as $url) {
-				parse_url($url, $result);
+                parse_url($url, $result);
                 if(isset($result))
                 {
                     $tmp[$result["itag"]] = $result["url"];
@@ -522,7 +522,7 @@ class yt_downloader implements cnfg
                 '37' => array('mp4', '1080p', '1')
             );
 
-			videos = array();
+            videos = array();
             foreach ($formats as $format => $meta) {
                 if (isset($tmp[$format])) {
                     $videos[] = array('pref' => $meta[2], 'ext' => $meta[0], 'type' => $meta[1], 'url' => $tmp[$format]);
@@ -657,8 +657,8 @@ class yt_downloader implements cnfg
     private function curl_httpstatus($url)
     {
         $ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_USERAGENT, $this->CURL_UA);
-		curl_setopt($ch, CURLOPT_REFERER, $this->YT_BASE_URL);
+        curl_setopt($ch, CURLOPT_USERAGENT, $this->CURL_UA);
+        curl_setopt($ch, CURLOPT_REFERER, $this->YT_BASE_URL);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_NOBODY, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
