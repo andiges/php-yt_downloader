@@ -469,7 +469,8 @@ class yt_downloader implements cnfg
         $pb_info = self::get_public_info();
 
         if($pb_info !== FALSE) {
-            $htmlTitle = htmlentities(utf8_decode($pb_info["title"]));
+			$prepared_title = htmlentities(mb_convert_encoding($pb_info["title"], "utf-8"));
+            $htmlTitle =  transliterator_transliterate("Any-Latin; Latin-ASCII; NFD; [:Nonspacing Mark:] Remove; NFC; Lower();", $prepared_title);
             $videoTitle = self::canonicalize($htmlTitle);
         }
         else {
