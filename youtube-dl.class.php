@@ -492,24 +492,19 @@ class yt_downloader implements cnfg
      */
     private function get_url_map($data)
     {
-        preg_match('/stream_map=(.[^&]*?)&/i',$data,$match);
-        if(!isset($match[1])) {
+		parse_str($data, $parsed_data);
+        if(empty($parsed_data['url_encoded_fmt_stream_map'])) {
             return FALSE;
         }
         else {
-            $fmt_url =  urldecode($match[1]);
-            if(preg_match('/^(.*?)\\\\u0026/',$fmt_url,$match2)) {
-                $fmt_url = $match2[1];
-            }
-
-            $urls = explode(',',$fmt_url);
+            $urls = explode(',',$parsed_data['url_encoded_fmt_stream_map']);
             $tmp = array();
 
             foreach($urls as $url) {
-                if(preg_match('/itag=([0-9]+)&url=(.*?)&.*?/si',$url,$um))
+				parse_url($url, $result);
+                if(isset($result))
                 {
-                    $u = urldecode($um[2]);
-                    $tmp[$um[1]] = $u;
+                    $tmp[$result["itag"]] = $result["url"];
                 }
             }
 
