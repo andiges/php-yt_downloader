@@ -64,7 +64,7 @@ class yt_downloader implements cnfg
     public function __construct($str=NULL, $instant=FALSE, $out=NULL)
     {
         // Required YouTube URLs.
-        $this->YT_BASE_URL = "http://www.youtube.com/";
+        $this->YT_BASE_URL = "https://www.youtube.com/";
         $this->YT_INFO_URL = $this->YT_BASE_URL . "get_video_info?video_id=%s&el=embedded&ps=default&eurl=&hl=en_US";
         $this->YT_INFO_ALT = $this->YT_BASE_URL . "oembed?url=%s&format=json";
         $this->YT_THUMB_URL = "http://img.youtube.com/vi/%s/%s.jpg";
