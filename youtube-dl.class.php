@@ -502,7 +502,7 @@ class yt_downloader implements cnfg
             $tmp = array();
 
             foreach($urls as $url) {
-                parse_url($url, $result);
+                parse_str($url, $result);
                 if(isset($result))
                 {
                     $tmp[$result["itag"]] = $result["url"];
@@ -522,7 +522,7 @@ class yt_downloader implements cnfg
                 '37' => array('mp4', '1080p', '1')
             );
 
-            videos = array();
+            $videos = array();
             foreach ($formats as $format => $meta) {
                 if (isset($tmp[$format])) {
                     $videos[] = array('pref' => $meta[2], 'ext' => $meta[0], 'type' => $meta[1], 'url' => $tmp[$format]);
