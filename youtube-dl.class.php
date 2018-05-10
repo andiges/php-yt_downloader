@@ -521,6 +521,7 @@ class yt_downloader implements cnfg
                 '37' => array('mp4', '1080p', '1')
             );
 
+			videos = array();
             foreach ($formats as $format => $meta) {
                 if (isset($tmp[$format])) {
                     $videos[] = array('pref' => $meta[2], 'ext' => $meta[0], 'type' => $meta[1], 'url' => $tmp[$format]);
@@ -655,8 +656,8 @@ class yt_downloader implements cnfg
     private function curl_httpstatus($url)
     {
         $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_USERAGENT, $this->CURL_UA);
-    curl_setopt($ch, CURLOPT_REFERER, $this->YT_BASE_URL);
+		curl_setopt($ch, CURLOPT_USERAGENT, $this->CURL_UA);
+		curl_setopt($ch, CURLOPT_REFERER, $this->YT_BASE_URL);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_NOBODY, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
